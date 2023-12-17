@@ -1,0 +1,87 @@
+syntax = "proto3";
+
+package bloggy.bloggy;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "bloggy/bloggy/params.proto";
+import "bloggy/bloggy/post.proto";
+import "bloggy/bloggy/posty.proto";
+
+option go_package = "bloggy/x/bloggy/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  
+  // Parameters queries the parameters of the module.
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/bloggy/bloggy/params";
+  
+  }
+  
+  // Queries a list of Post items.
+  rpc Post    (QueryGetPostRequest) returns (QueryGetPostResponse) {
+    option (google.api.http).get = "/bloggy/bloggy/post/{id}";
+  
+  }
+  rpc PostAll (QueryAllPostRequest) returns (QueryAllPostResponse) {
+    option (google.api.http).get = "/bloggy/bloggy/post";
+  
+  }
+  
+  // Queries a list of Posty items.
+  rpc Posty    (QueryGetPostyRequest) returns (QueryGetPostyResponse) {
+    option (google.api.http).get = "/bloggy/bloggy/posty/{id}";
+  
+  }
+  rpc PostyAll (QueryAllPostyRequest) returns (QueryAllPostyResponse) {
+    option (google.api.http).get = "/bloggy/bloggy/posty";
+  
+  }
+}
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  
+  // params holds all the parameters of this module.
+  Params params = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+}
+
+message QueryGetPostRequest {
+  uint64 id = 1;
+}
+
+message QueryGetPostResponse {
+  Post Post = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllPostRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllPostResponse {
+  repeated Post                                   Post       = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetPostyRequest {
+  uint64 id = 1;
+}
+
+message QueryGetPostyResponse {
+  Posty Posty = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllPostyRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllPostyResponse {
+  repeated Posty                                  Posty      = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+

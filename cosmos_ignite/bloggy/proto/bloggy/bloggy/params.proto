@@ -1,0 +1,15 @@
+syntax = "proto3";
+package bloggy.bloggy;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "bloggy/x/bloggy/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (amino.name) = "bloggy/x/bloggy/Params";
+  option (gogoproto.equal) = true;
+
+  
+}
