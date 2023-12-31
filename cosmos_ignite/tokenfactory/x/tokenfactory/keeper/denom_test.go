@@ -5,11 +5,12 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/stretchr/testify/require"
 	keepertest "tokenfactory/testutil/keeper"
 	"tokenfactory/testutil/nullify"
 	"tokenfactory/x/tokenfactory/keeper"
 	"tokenfactory/x/tokenfactory/types"
+
+	"github.com/stretchr/testify/require"
 )
 
 // Prevent strconv unused error
@@ -37,19 +38,6 @@ func TestDenomGet(t *testing.T) {
 			nullify.Fill(&item),
 			nullify.Fill(&rst),
 		)
-	}
-}
-func TestDenomRemove(t *testing.T) {
-	keeper, ctx := keepertest.TokenfactoryKeeper(t)
-	items := createNDenom(keeper, ctx, 10)
-	for _, item := range items {
-		keeper.RemoveDenom(ctx,
-			item.Denom,
-		)
-		_, found := keeper.GetDenom(ctx,
-			item.Denom,
-		)
-		require.False(t, found)
 	}
 }
 

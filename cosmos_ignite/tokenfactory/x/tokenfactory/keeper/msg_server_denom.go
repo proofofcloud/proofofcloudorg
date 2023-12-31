@@ -3,10 +3,11 @@ package keeper
 import (
 	"context"
 
+	"tokenfactory/x/tokenfactory/types"
+
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	"tokenfactory/x/tokenfactory/types"
 )
 
 func (k msgServer) CreateDenom(goCtx context.Context, msg *types.MsgCreateDenom) (*types.MsgCreateDenomResponse, error) {
@@ -90,11 +91,6 @@ func (k msgServer) DeleteDenom(goCtx context.Context, msg *types.MsgDeleteDenom)
 	if msg.Owner != valFound.Owner {
 		return nil, errorsmod.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
 	}
-
-	k.RemoveDenom(
-		ctx,
-		msg.Denom,
-	)
 
 	return &types.MsgDeleteDenomResponse{}, nil
 }
