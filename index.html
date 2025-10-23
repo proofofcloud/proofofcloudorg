@@ -982,9 +982,6 @@
             resultBox.className = 'result-box';
             resultDetails.innerHTML = '';
 
-            // Demo verification logic (replace with actual API call)
-            // This is a placeholder that simulates the verification process
-            
             if (!attestation) {
                 resultBox.className = 'result-box error';
                 resultTitle.textContent = '❌ Verification Failed';
@@ -992,48 +989,69 @@
                 return;
             }
 
-            // Simulate API delay
+            // Show loading state
             resultBox.className = 'result-box';
             resultBox.style.display = 'block';
             resultTitle.textContent = '⏳ Verifying...';
             resultMessage.textContent = 'Checking attestation against registry...';
 
-            await new Promise(resolve => setTimeout(resolve, 1500));
+            try {
+                // Call server API for verification
+                const response = await fetch('/api/verify-attestation', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ attestation })
+                });
 
-            // Demo: randomly succeed or show example scenarios
-            const demoScenarios = [
-                {
-                    success: true,
-                    ppid: 'a3f2...8c91',
-                    level: 'Level 2',
-                    provider: 'Verified Cloud Provider',
-                    lastVerified: '2025-10-20',
-                    tcbStatus: 'Up to Date'
-                },
-                {
-                    success: false,
-                    reason: 'Hardware ID not found in registry'
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.error || 'Verification failed');
                 }
-            ];
 
-            const result = demoScenarios[0]; // Always show success for demo
+                if (result.success) {
+                    const { verification, details } = result;
+                    
+                    // Check if both attestation is valid AND machine is in allowlist
+                    if (verification.attestationValid && verification.machineInAllowlist) {
+                        resultBox.className = 'result-box success';
+                        resultTitle.textContent = '✓ Attestation Verified';
+                        resultMessage.textContent = 'This hardware is registered in the Proof of Cloud registry and meets verification requirements.';
+                    } else if (verification.attestationValid && !verification.machineInAllowlist) {
+                        resultBox.className = 'result-box error';
+                        resultTitle.textContent = '⚠️ Hardware Not Registered';
+                        resultMessage.textContent = 'The attestation is valid, but this hardware is not in the Proof of Cloud allowlist.';
+                    } else {
+                        resultBox.className = 'result-box error';
+                        resultTitle.textContent = '❌ Invalid Attestation';
+                        resultMessage.textContent = 'The provided attestation could not be verified.';
+                    }
 
-            if (result.success) {
-                resultBox.className = 'result-box success';
-                resultTitle.textContent = '✓ Attestation Verified';
-                resultMessage.textContent = 'This hardware is registered in the Proof of Cloud registry and meets verification requirements.';
-                resultDetails.innerHTML = `
-                    <strong>Hardware Details:</strong><br>
-                    PPID: ${result.ppid}<br>
-                    Verification Level: ${result.level}<br>
-                    Provider: ${result.provider}<br>
-                    Last Verified: ${result.lastVerified}<br>
-                    TCB Status: ${result.tcbStatus}
-                `;
-            } else {
+                    // Always show details
+                    resultDetails.innerHTML = `
+                        <strong>Verification Results:</strong><br>
+                        Attestation Valid: ${verification.attestationValid ? 'Yes' : 'No'}<br>
+                        Machine in Allowlist: ${verification.machineInAllowlist ? 'Yes' : 'No'}<br>
+                        <br>
+                        <strong>Hardware Details:</strong><br>
+                        PPID: ${details.ppid}<br>
+                        Verification Level: ${details.level}<br>
+                        Provider: ${details.provider}<br>
+                        ${details.lastVerified ? `Last Verified: ${details.lastVerified}<br>` : ''}
+                        TCB Status: ${details.tcbStatus}
+                    `;
+                } else {
+                    throw new Error('Verification service returned an error');
+                }
+
+            } catch (error) {
+                console.error('Verification error:', error);
                 resultBox.className = 'result-box error';
                 resultTitle.textContent = '❌ Verification Failed';
-                resultMessage.textContent = result.reason;
+                resultMessage.textContent = error.message || 'An error occurred during verification. Please try again.';
+                resultDetails.innerHTML = '';
             }
         });
     </script>
