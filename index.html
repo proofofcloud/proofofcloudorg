@@ -1029,17 +1029,14 @@
                         resultMessage.textContent = 'The provided attestation could not be verified.';
                     }
 
-                    // Always show details
+                    // Always show details with checkmarks
                     resultDetails.innerHTML = `
                         <strong>Verification Results:</strong><br>
-                        Attestation Valid: ${verification.attestationValid ? 'Yes' : 'No'}<br>
-                        Machine in Allowlist: ${verification.machineInAllowlist ? 'Yes' : 'No'}<br>
+                        ${verification.attestationValid ? '✅' : '❌'} Attestation Valid<br>
+                        ${verification.machineInAllowlist ? '✅' : '❌'} Machine in Allowlist<br>
                         <br>
                         <strong>Hardware Details:</strong><br>
                         PPID: ${details.ppid}<br>
-                        Verification Level: ${details.level}<br>
-                        Provider: ${details.provider}<br>
-                        ${details.lastVerified ? `Last Verified: ${details.lastVerified}<br>` : ''}
                         TCB Status: ${details.tcbStatus}
                     `;
                 } else {

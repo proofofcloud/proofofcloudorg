@@ -49,9 +49,6 @@ app.post('/api/verify-attestation', (req, res) => {
             // Simulate extracting hardware details
             const mockHardwareDetails = {
                 ppid: generateMockPPID(),
-                level: isInAllowlist ? 'Level 2' : 'Not Registered',
-                provider: isInAllowlist ? 'Verified Cloud Provider' : 'Unknown Provider',
-                lastVerified: isInAllowlist ? new Date().toISOString().split('T')[0] : null,
                 tcbStatus: isValidAttestation ? 'Up to Date' : 'Unknown'
             };
 
