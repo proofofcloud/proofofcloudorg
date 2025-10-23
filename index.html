@@ -1032,8 +1032,8 @@
                     // Always show details with checkmarks
                     resultDetails.innerHTML = `
                         <strong>Verification Results:</strong><br>
-                        ${verification.attestationValid ? '✅' : '❌'} Attestation Valid<br>
-                        ${verification.machineInAllowlist ? '✅' : '❌'} Machine in Allowlist<br>
+                        ${verification.attestationValid ? '✅' : '❌'} Attestation is valid<br>
+                        ${verification.machineInAllowlist ? '✅' : '❌'} MachineID is present in the ProofOfCloud.org allowlist<br>
                         <br>
                         <strong>Hardware Details:</strong><br>
                         PPID: ${details.ppid}<br>
