@@ -50,6 +50,9 @@
         }
 
         .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
             font-size: 1.35rem;
             font-weight: 700;
             color: var(--primary);
@@ -155,7 +158,10 @@
 <body>
     <nav>
         <div class="container">
-            <a class="logo" href="index.html">Proof of Cloud</a>
+            <a class="logo" href="index.html">
+                <img src="assets/proof-of-cloud-logo.png" alt="Proof of Cloud logo" style="width: 32px; height: 32px;">
+                Proof of Cloud
+            </a>
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="charter.html">Charter</a></li>
