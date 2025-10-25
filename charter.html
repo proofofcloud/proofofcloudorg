@@ -218,7 +218,7 @@
                 <h2>4. Verification Levels</h2>
 
                 <h3>L1 &mdash; Member mutual verification (manual + Remote Attestation)</h3>
-                <p>Two independent members perform a <strong>live</strong> verification: run <strong>hardware RA</strong> (Intel DCAP SGX/TDX or AMD SEV-SNP), <strong>extract the identity</strong> (PPID/Chip ID), and capture a <strong>cloud instance identity</strong> token (AWS IID / GCP OIDC / Azure IMDS). Bind them with a <strong>nonce</strong>. Produce a <strong>signed evidence pack</strong>, with a <strong>30&ndash;60 day</strong> validity window.</p>
+                <p>Two independent members perform a <strong>live</strong> verification: run <strong>hardware RA</strong> (Intel DCAP SGX/TDX or AMD SEV-SNP), <strong>extract the identity</strong> (PPID/Chip ID), and capture a <strong>cloud instance identity</strong> token where available (AWS IID / GCP OIDC / Azure IMDS). Bind them with a <strong>nonce</strong>. In case the hardware is in Colocation, members perform a verification of signed Colocation Provider Pledge. Produce a <strong>signed evidence pack</strong>, with a <strong>30&ndash;60 day</strong> validity window.</p>
 
                 <h3>L2 &mdash; API-bound + zkTLS, with continuous monitoring</h3>
                 <p>Automate retrieval of cloud control-plane identity and <strong>bind</strong> it to RA (nonces &rarr; RA user data). Capture <strong>verifiable TLS transcripts</strong> (TLSNotary/zkTLS-style) proving what the CSP API stated at time <em>t</em>. Add <strong>weekly</strong> (or better) <strong>re-attestation</strong>, TCB-change alerts, and drift detection.</p>
