@@ -16,33 +16,47 @@ Proof of Cloud is a consortium that maintains a transparent, verifiable registry
 - **Alliance Governance**: Transparent governance structure with founding members
 - **Interactive Verification**: Live attestation verification tool
 - **Comprehensive Documentation**: Complete charter, privacy policy, and terms of service
+- **Modern Design**: Built with Next.js and shadcn/ui for professional appearance
 
 ## 📁 Repository Structure
 
 ```
-├── index.html          # Main landing page
-├── charter.html        # Alliance charter and governance
-├── privacy.html        # Privacy policy
-├── tos.html           # Terms of service
-├── assets/            # Images and static assets
-│   ├── clouds_hero.png            # Hero section background
-│   ├── proof-of-cloud-logo.png    # Main logo
-│   ├── proof-of-cloud-logo.svg    # Main logo (SVG)
-│   ├── scrt.png                   # Secret Network logo
-│   ├── phala.png                  # Phala Network logo
-│   └── *.svg                      # Additional logo files
-├── favicon-16.png      # 16x16 favicon
-├── favicon-32.png      # 32x32 favicon
-├── favicon.png         # Standard favicon
-└── README.md          # This file
+├── frontend/                   # Next.js application with shadcn/ui
+│   ├── app/
+│   │   ├── layout.tsx          # Root layout with Nav & Footer
+│   │   ├── page.tsx            # Landing page
+│   │   └── globals.css         # shadcn theme variables
+│   ├── components/
+│   │   ├── ui/                 # shadcn components (button, card, etc.)
+│   │   ├── nav.tsx             # Navigation component
+│   │   ├── footer.tsx          # Footer component
+│   │   └── verification-form.tsx  # Attestation verification form
+│   └── public/assets/          # Images and logos
+├── server/                     # Node.js backend (separate)
+│   └── server.js               # Express server with verification API
+├── dcap_collateral_tool/       # Intel DCAP verification tool
+├── docs/                       # Alliance documentation
+│   ├── charter-draft-v0.1.md
+│   ├── l1-verification-methods.md
+│   ├── rfid.md
+│   └── overview.md
+├── assets/                     # Original assets
+└── package.json               # Backend dependencies
 ```
 
-## 🛠 Technical Details
+## 🛠 Technical Stack
 
-- **Static Website**: Pure HTML/CSS/JavaScript - no build process required
-- **Responsive Design**: Mobile-friendly layout with modern CSS
-- **Interactive Elements**: JavaScript-powered verification form
-- **Optimized Assets**: Compressed images and efficient loading
+### Frontend (Next.js + shadcn/ui)
+- **Next.js 14+**: React framework with App Router
+- **TypeScript**: Type-safe development
+- **Tailwind CSS**: Utility-first CSS framework
+- **shadcn/ui**: Modern component library
+- **lucide-react**: Icon library
+
+### Backend (Node.js)
+- **Express**: Web server framework
+- **DCAP Tool**: Intel attestation verification
+- **API Endpoint**: `/api/verify-attestation`
 
 ## 🏢 Alliance Members
 
@@ -52,32 +66,75 @@ Proof of Cloud is a consortium that maintains a transparent, verifiable registry
 
 ## 📝 Development
 
-### Local Development
-Simply open `index.html` in a web browser or serve via any HTTP server:
+### Prerequisites
+- Node.js 18+
+- npm or yarn
+
+### Running the Frontend (Next.js)
 
 ```bash
-# Using Python's built-in server
-python -m http.server 8000
-
-# Using Node.js http-server
-npx http-server
-
-# Using PHP's built-in server
-php -S localhost:8000
+cd frontend
+npm install
+npm run dev
 ```
 
-### Making Changes
-1. Edit HTML files directly
-2. Update assets in the `assets/` folder
-3. Test locally
-4. Commit and push to update the live site
+The frontend will be available at `http://localhost:3000`
+
+### Running the Backend (Node.js)
+
+```bash
+# In the root directory
+npm install
+npm start
+# or
+npm run dev
+```
+
+The backend API will be available at `http://localhost:3000/api/*`
+
+### Building DCAP Tool
+
+```bash
+# Prerequisites (Ubuntu/Debian)
+sudo apt update
+sudo apt install -y g++ libsgx-dcap-ql libsgx-dcap-quote-verify-dev libsgx-dcap-ql-dev
+
+# Build
+cd dcap_collateral_tool
+g++ dcap_collateral_tool.cpp \
+  -O2 \
+  -L/usr/lib/x86_64-linux-gnu \
+  -lsgx_dcap_quoteverify \
+  -o bin/dcap_collateral_tool
+```
+
+### Project Setup
+
+The project consists of two separate parts:
+
+1. **Frontend** (`/frontend`): Next.js application with shadcn/ui components
+2. **Backend** (`/server`): Node.js Express server with attestation verification
+
+These run independently - the frontend makes API calls to the backend.
+
+## 🎨 Design System
+
+The website uses **shadcn/ui** for a modern, professional design:
+
+- Clean, minimal aesthetic
+- Neutral color palette (slate/zinc)
+- Subtle shadows and borders
+- Responsive grid layouts
+- Dark mode support (built-in)
+- Professional typography with Inter font
 
 ## 🔗 Key Links
 
 - **Apply for Membership**: [Google Form](https://forms.gle/kcradbEPmp9ZUbhx8)
-- **Charter**: [charter.html](charter.html)
-- **Privacy Policy**: [privacy.html](privacy.html)
-- **Terms of Service**: [tos.html](tos.html)
+- **Charter**: `/charter`
+- **Verification Methods**: `/verification-methods`
+- **Privacy Policy**: `/privacy`
+- **Terms of Service**: `/tos`
 
 ## 📄 License
 
