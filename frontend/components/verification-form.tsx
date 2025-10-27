@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
 
-export function VerificationForm() {
+export function VerificationFormWithLabel() {
   const [attestation, setAttestation] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<{
@@ -109,17 +109,22 @@ export function VerificationForm() {
   return (
     <div className="space-y-4">
       <form onSubmit={handleSubmit} className="space-y-4">
-        <Textarea
-          id="attestation"
-          value={attestation}
-          onChange={(e) => setAttestation(e.target.value)}
-          placeholder="Paste attestation quote..."
-          rows={8}
-          className="font-mono text-sm resize-none"
-          required
-        />
+        <div className="form-group mb-6">
+          <label htmlFor="attestation" className="block mb-2 font-semibold text-gray-900">
+            TEE Attestation Quote (Intel TDX / AMD SEV, Base64 or Hex)
+          </label>
+          <Textarea
+            id="attestation"
+            value={attestation}
+            onChange={(e) => setAttestation(e.target.value)}
+            placeholder={"Paste your modern TEE attestation quote here (Intel TDX or AMD SEV)...\n\nSupported formats:\n- Base64-encoded TEE quote\n- Hex-encoded TEE quote\n- DCAP format with full certificate chains"}
+            rows={8}
+            className="font-mono text-sm resize-vertical border-2 border-gray-300 focus:border-blue-600 whitespace-pre-wrap"
+            required
+          />
+        </div>
 
-        <Button type="submit" className="w-full" size="lg" disabled={loading}>
+        <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white" size="lg" disabled={loading}>
           {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           {loading ? "Verifying..." : "Verify Attestation"}
         </Button>
@@ -164,3 +169,6 @@ export function VerificationForm() {
     </div>
   );
 }
+
+// Re-export the original for backward compatibility
+export { VerificationFormWithLabel as VerificationForm };
