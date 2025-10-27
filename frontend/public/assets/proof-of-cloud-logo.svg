@@ -1,0 +1,21 @@
+<svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="cloudGradient" x1="40" y1="40" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#2563EB"/>
+            <stop offset="1" stop-color="#0EA5E9"/>
+        </linearGradient>
+        <linearGradient id="checkGradient" x1="60" y1="100" x2="100" y2="140" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#10B981"/>
+            <stop offset="1" stop-color="#0EA5E9"/>
+        </linearGradient>
+        <filter id="shadow" x="0" y="0" width="200" height="200" filterUnits="userSpaceOnUse">
+            <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="rgba(15,23,42,0.25)" />
+        </filter>
+    </defs>
+    <g filter="url(#shadow)">
+        <path d="M58 60C62 42 78 28 98 28C118 28 134 42 138 60C148 62 156 72 156 84C156 100 142 112 126 112H56C38 112 24 100 24 84C24 70 34 58 48 56C50 52 54 44 58 40" fill="url(#cloudGradient)"/>
+    </g>
+    <circle cx="60" cy="64" r="12" fill="rgba(255,255,255,0.2)"/>
+    <path d="M70 94L86 110L112 78" stroke="url(#checkGradient)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="104" cy="72" r="12" fill="rgba(255,255,255,0.15)"/>
+</svg>
