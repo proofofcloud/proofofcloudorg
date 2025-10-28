@@ -119,6 +119,14 @@ export default function Home() {
               <p className="text-gray-600 mb-4">Automata is the machine attestation layer built by humans, designed for machines.</p>
             </div>
 
+            <div className="bg-white p-8 rounded-xl border-2 border-gray-200 text-center hover:shadow-xl hover:-translate-y-1 transition-all">
+              <div className="w-24 h-24 mx-auto mb-6 flex items-center justify-center bg-white rounded-2xl border border-gray-200 p-3">
+                <Image src="/assets/primus.png" alt="Primus" width={96} height={96} className="object-contain" />
+              </div>
+              <h3 className="text-2xl font-semibold mb-3">Primus</h3>
+              <p className="text-gray-600 mb-4">Enable secure, permissionless data verification and computation in blockchain and AI using zkTLS and zkFHE.</p>
+            </div>
+
             <div className="bg-gray-50 p-8 rounded-xl border-2 border-dashed border-gray-300 text-center">
               <div className="w-24 h-24 mx-auto mb-6 flex items-center justify-center bg-white rounded-2xl border border-gray-300">
                 <span className="text-4xl text-gray-400">+</span>
