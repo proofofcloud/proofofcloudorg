@@ -60,9 +60,9 @@ Proof of Cloud is a consortium that maintains a transparent, verifiable registry
 
 ## 🏢 Alliance Members
 
-### Founding Members
+### Members
 - **Secret Network** - Privacy-first blockchain platform
-- **Phala Network** - Confidential computing cloud built on Polkadot
+- **Phala Network** - Confidential computing cloud
 
 ## 📝 Development
 

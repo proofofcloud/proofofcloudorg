@@ -2,31 +2,31 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="border-t bg-background">
-      <div className="container py-12">
+    <footer className="bg-gray-900 text-white py-12">
+      <div className="container max-w-6xl">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           <div>
-            <h4 className="text-sm font-semibold mb-4">Proof of Cloud</h4>
-            <p className="text-sm text-muted-foreground">
+            <h4 className="text-base font-semibold mb-4">Proof of Cloud</h4>
+            <p className="text-sm text-gray-400">
               A vendor-neutral alliance for verifiable cloud hardware infrastructure.
             </p>
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold mb-4">Resources</h4>
+            <h4 className="text-base font-semibold mb-4">Resources</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/charter" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <Link href="/charter" className="text-sm text-gray-400 hover:text-white transition-colors">
                   Charter
                 </Link>
               </li>
               <li>
-                <Link href="/verification-methods" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <Link href="/verification-methods" className="text-sm text-gray-400 hover:text-white transition-colors">
                   Verification Methods
                 </Link>
               </li>
               <li>
-                <a href="https://github.com/proofofcloud" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <a href="https://github.com/proofofcloud" className="text-sm text-gray-400 hover:text-white transition-colors">
                   GitHub
                 </a>
               </li>
@@ -34,15 +34,15 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold mb-4">Contact</h4>
+            <h4 className="text-base font-semibold mb-4">Contact</h4>
             <ul className="space-y-2">
               <li>
-                <a href="mailto:contact@proofofcloud.org" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <a href="mailto:contact@proofofcloud.org" className="text-sm text-gray-400 hover:text-white transition-colors">
                   General Inquiries
                 </a>
               </li>
               <li>
-                <a href="mailto:contact@proofofcloud.org" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <a href="https://forms.gle/kcradbEPmp9ZUbhx8" className="text-sm text-gray-400 hover:text-white transition-colors">
                   Apply for Membership
                 </a>
               </li>
@@ -50,15 +50,15 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold mb-4">Legal</h4>
+            <h4 className="text-base font-semibold mb-4">Legal</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/privacy" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <Link href="/privacy" className="text-sm text-gray-400 hover:text-white transition-colors">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/tos" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <Link href="/tos" className="text-sm text-gray-400 hover:text-white transition-colors">
                   Terms of Service
                 </Link>
               </li>
@@ -66,7 +66,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t text-center text-sm text-muted-foreground">
+        <div className="mt-8 pt-8 border-t border-gray-800 text-center text-sm text-gray-400">
           <p>&copy; 2025 Proof of Cloud Alliance. Open source and vendor-neutral.</p>
         </div>
       </div>
