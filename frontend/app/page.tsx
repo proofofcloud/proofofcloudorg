@@ -105,10 +105,10 @@ export default function Home() {
 
             <div className="bg-white p-8 rounded-xl border-2 border-gray-200 text-center hover:shadow-xl hover:-translate-y-1 transition-all">
               <div className="w-24 h-24 mx-auto mb-6 flex items-center justify-center bg-white rounded-2xl border border-gray-200 p-3">
-                <Image src="/assets/phala.png" alt="Phala Network" width={96} height={96} className="object-contain" />
+                <Image src="/assets/phala.png" alt="Phala" width={96} height={96} className="object-contain" />
               </div>
-              <h3 className="text-2xl font-semibold mb-3">Phala Network</h3>
-              <p className="text-gray-600 mb-4">Confidential computing cloud built on Polkadot, providing trustless computation and verifiable off-chain execution.</p>
+              <h3 className="text-2xl font-semibold mb-3">Phala</h3>
+              <p className="text-gray-600 mb-4">Hardware-secured compute platform that delivers Confidential AI with enterprise-grade privacy.</p>
             </div>
 
             <div className="bg-gray-50 p-8 rounded-xl border-2 border-dashed border-gray-300 text-center">
