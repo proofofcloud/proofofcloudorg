@@ -10,26 +10,20 @@ export default function Home() {
         
         <div className="container relative z-10 text-center px-8 mx-auto" style={{ maxWidth: '1200px' }}>
           <h1 className="text-5xl font-extrabold tracking-tight mb-4 leading-tight">
-            Verifiable Cloud Hardware Registry
+            Proof of Cloud
           </h1>
           <p className="text-xl max-w-4xl mx-auto mb-8 opacity-95 leading-relaxed">
-            A vendor-neutral alliance maintaining a signed registry of cloud-hosted server hardware identities.
-            Making it verifiable — not merely asserted — that confidential computing workloads run on genuine cloud infrastructure.
+          Verify your confidential workloads run on legitimate cloud hardware in secure facilities, with the database governed and maintained by the Proof of Cloud Alliance.
           </p>
-          
-          <div className="flex flex-wrap justify-center gap-12 mt-12">
-            <div className="text-center">
-              <div className="text-5xl font-bold mb-2">2</div>
-              <div className="text-base opacity-90">Founding Members</div>
-            </div>
-            <div className="text-center">
-              <div className="text-5xl font-bold mb-2">3</div>
-              <div className="text-base opacity-90">Verification Levels</div>
-            </div>
-            <div className="text-center">
-              <div className="text-5xl font-bold mb-2">100%</div>
-              <div className="text-base opacity-90">Open & Transparent</div>
-            </div>
+        </div>
+      </section>
+
+      {/* Verification Section */}
+      <section id="verify" className="py-16 bg-white">
+        <div className="container px-8 mx-auto" style={{ maxWidth: '1200px' }}>
+          <h2 className="text-4xl font-bold text-center mb-4">Verify an Attestation</h2>          
+          <div className="max-w-3xl mx-auto bg-gray-50 rounded-xl p-10 border border-gray-200">
+            <VerificationFormWithLabel />
           </div>
         </div>
       </section>
@@ -37,9 +31,15 @@ export default function Home() {
       {/* Why Section */}
       <section id="why" className="py-16 bg-white">
         <div className="container px-8 mx-auto" style={{ maxWidth: '1200px' }}>
-          <h2 className="text-4xl font-bold text-center mb-4">Why Proof of Cloud?</h2>
+          <h2 className="text-4xl font-bold text-center mb-4">Why Proof of Cloud</h2>
           <p className="text-xl text-center text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed">
-            Modern TEEs, such as Intel TDX and AMD SEV, provide runtime protection but don't defend against physical tampering. The security promise depends on hardware residing in physically secure cloud datacenters.
+          No security model is perfect. But requiring an attacker to break both the TEE and physically compromise a verified facility creates two independent security barriers instead of one. That's the foundation of defense in depth.
+          </p>
+
+          <h2 className="text-4xl font-bold text-center mb-4">How It Works</h2>
+
+          <p className="text-xl text-center text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed">
+          Proof of Cloud maintains a public registry binding hardware IDs to verified physical locations. An attacker now needs to break your TEE and physically compromise a facility that multiple independent organizations have verified.
           </p>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -48,23 +48,10 @@ export default function Home() {
                 <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                 </svg>
-                Trust Gap
+                Hardware Identity
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                Major cloud providers offer cloud verification but lack bare-metal modern TEE instances. Bare-metal providers offering Intel TDX or AMD SEV cannot easily prove their datacenter security posture.
-              </p>
-            </div>
-
-            <div className="p-8 bg-gray-50 rounded-xl border border-gray-200">
-              <h3 className="text-xl font-semibold mb-3 text-blue-600 flex items-center gap-3">
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="10"/>
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6l4 2"/>
-                </svg>
-                Adoption Blocker
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                Projects requiring bare-metal servers to run their confidential VMs face a barrier: they need hardware with verifiable cloud provenance.
+              TEE attestation generates a quote that binds a unique hardware ID—Intel's DCAP PPID or AMD's Chip ID—to your measurements. That hardware ID becomes the key.
               </p>
             </div>
 
@@ -75,36 +62,36 @@ export default function Home() {
                   <circle cx="9" cy="7" r="4"/>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
                 </svg>
-                Consortium Solution
+                Independent Verification
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                Members jointly verify each other's servers through live attestation and cloud identity binding, creating a transparent, auditable registry of verified hardware.
+              Alliance members independently verify where that hardware lives. They visit facilities, boot fresh hardware, extract IDs through attestation, and cross-verify each other. No single organization controls the registry.
+              </p>
+            </div>
+
+            <div className="p-8 bg-gray-50 rounded-xl border border-gray-200">
+              <h3 className="text-xl font-semibold mb-3 text-blue-600 flex items-center gap-3">
+                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6l4 2"/>
+                </svg>
+                Transparent Registry
+              </h3>
+              <p className="text-gray-600 leading-relaxed">
+              Verified entries go into an append-only signed log, similar to Certificate Transparency. Updates require a quorum of alliance signatures. All evidence is public and auditable.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Verification Section */}
-      <section id="verify" className="py-16 bg-white">
-        <div className="container px-8 mx-auto" style={{ maxWidth: '1200px' }}>
-          <h2 className="text-4xl font-bold text-center mb-4">Verify an Attestation</h2>
-          <p className="text-xl text-center text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed">
-            Verify your confidential workloads run on legitimate cloud hardware in secure facilities.
-          </p>
-          
-          <div className="max-w-3xl mx-auto bg-gray-50 rounded-xl p-10 border border-gray-200">
-            <VerificationFormWithLabel />
-          </div>
-        </div>
-      </section>
 
       {/* Members Section */}
       <section id="members" className="py-16 bg-gray-50">
         <div className="container px-8 mx-auto" style={{ maxWidth: '1200px' }}>
           <h2 className="text-4xl font-bold text-center mb-4">Alliance Members</h2>
           <p className="text-xl text-center text-gray-600 max-w-3xl mx-auto mb-12">
-            The consortium is founded by leaders in confidential computing and privacy-preserving infrastructure.
+            Maintained by leaders in confidential computing and privacy-preserving infrastructure.
           </p>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
@@ -114,7 +101,6 @@ export default function Home() {
               </div>
               <h3 className="text-2xl font-semibold mb-3">Secret Network</h3>
               <p className="text-gray-600 mb-4">Privacy-first blockchain platform enabling programmable privacy through secure enclaves and confidential smart contracts.</p>
-              <span className="inline-block bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-semibold uppercase">Founding Member</span>
             </div>
 
             <div className="bg-white p-8 rounded-xl border-2 border-gray-200 text-center hover:shadow-xl hover:-translate-y-1 transition-all">
@@ -123,16 +109,15 @@ export default function Home() {
               </div>
               <h3 className="text-2xl font-semibold mb-3">Phala Network</h3>
               <p className="text-gray-600 mb-4">Confidential computing cloud built on Polkadot, providing trustless computation and verifiable off-chain execution.</p>
-              <span className="inline-block bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-semibold uppercase">Founding Member</span>
             </div>
 
             <div className="bg-gray-50 p-8 rounded-xl border-2 border-dashed border-gray-300 text-center">
               <div className="w-24 h-24 mx-auto mb-6 flex items-center justify-center bg-white rounded-2xl border border-gray-300">
-                <span className="text-4xl text-gray-400">?</span>
+                <span className="text-4xl text-gray-400">+</span>
               </div>
               <h3 className="text-2xl font-semibold mb-3">Your Organization</h3>
               <p className="text-gray-600 mb-4">Join the alliance and help build a transparent, verifiable registry for confidential computing infrastructure.</p>
-              <a href="https://forms.gle/kcradbEPmp9ZUbhx8" className="text-blue-600 font-semibold hover:underline">Apply to Join →</a>
+              <a href="mailto:contact@proofofcloud.org" className="text-blue-600 font-semibold hover:underline">Apply to Join →</a>
             </div>
           </div>
         </div>
@@ -141,31 +126,13 @@ export default function Home() {
       {/* How It Works */}
       <section id="how" className="py-16 bg-white">
       <div className="container px-8 mx-auto" style={{ maxWidth: "1200px" }}>
-          <h2 className="text-4xl font-bold text-center mb-4">How It Works</h2>
-          <p className="text-xl text-center text-gray-600 max-w-3xl mx-auto mb-16 leading-relaxed">
-            A transparent, multi-level verification process ensures hardware integrity and cloud provenance.
+          <h2 className="text-4xl font-bold text-center mb-4">Verification Levels</h2>
+
+          <p className="text-xl text-center text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed">
+          We define 3 levels of verification, with higher levels indicating stronger security guarantees. These levels are intentionally defined abstractly, allowing flexibility for future evolution of detailed verification methodologies.
           </p>
 
-          <div className="max-w-4xl mx-auto bg-gray-50 rounded-2xl p-10 md:p-12 border border-gray-200 shadow-sm space-y-6">
-            <p className="text-lg text-gray-700 leading-relaxed">
-              TEE attestation generates a quote that binds a unique hardware ID—Intel&apos;s
-              DCAP PPID or AMD&apos;s Chip ID—to your measurements. That hardware ID
-              becomes the key.
-            </p>
-            <p className="text-lg text-gray-700 leading-relaxed">
-              Alliance members independently verify where that hardware lives. They visit
-              facilities, boot fresh hardware, extract IDs through attestation, and
-              cross-verify each other. No single organization controls the registry.
-            </p>
-            <p className="text-lg text-gray-700 leading-relaxed">
-              Verified entries go into an append-only signed log, similar to Certificate
-              Transparency. Updates require a quorum of alliance signatures. All evidence
-              is public and auditable.
-            </p>
-          </div>
-
           <div className="mt-16 pt-16 border-t border-gray-200">
-            <h3 className="text-2xl font-bold text-center mb-8">Verification Levels</h3>
             <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
               <div className="p-6 bg-gray-50 rounded-lg border-l-4 border-blue-600">
                 <div className="inline-block bg-blue-600 text-white px-3 py-1 rounded font-semibold text-sm mb-4">
@@ -207,10 +174,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why This Is Hard to Fake */}
+      {/* Why This Is Secure */}
       <section className="py-16 bg-gray-50">
         <div className="container px-8 mx-auto" style={{ maxWidth: '900px' }}>
-          <h2 className="text-4xl font-bold text-center mb-12">Why This Is Hard to Fake</h2>
+          <h2 className="text-4xl font-bold text-center mb-12">Why This Is Secure</h2>
 
           <div className="space-y-6">
             <div className="flex gap-4">

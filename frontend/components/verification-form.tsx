@@ -111,15 +111,14 @@ export function VerificationFormWithLabel() {
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="form-group mb-6">
           <label htmlFor="attestation" className="block mb-2 font-semibold text-gray-900">
-            TEE Attestation Quote (Intel TDX / AMD SEV, Base64 or Hex)
+            Attestation Quote
           </label>
           <Textarea
             id="attestation"
             value={attestation}
             onChange={(e) => setAttestation(e.target.value)}
-            placeholder={"Paste your modern TEE attestation quote here (Intel TDX or AMD SEV)...\n\nSupported formats:\n- Base64-encoded TEE quote\n- Hex-encoded TEE quote\n- DCAP format with full certificate chains"}
-            rows={8}
-            className="font-mono text-sm resize-vertical border-2 border-gray-300 focus:border-blue-600 whitespace-pre-wrap"
+            placeholder={"Paste your TEE attestation here (Base64 or hex encoded)"}
+            className="font-mono text-sm resize-vertical border-2 border-gray-300 focus:border-blue-600 whitespace-pre-wrap h-[100px]"
             required
           />
         </div>
