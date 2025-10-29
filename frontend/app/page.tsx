@@ -89,7 +89,7 @@ export default function Home() {
       {/* Members Section */}
       <section id="members" className="py-16 bg-gray-50">
         <div className="container px-8 mx-auto" style={{ maxWidth: '1200px' }}>
-          <h2 className="text-4xl font-bold text-center mb-4">Alliance Members</h2>
+          <h2 className="text-4xl font-bold text-center mb-4">Contributors</h2>
           <p className="text-xl text-center text-gray-600 max-w-3xl mx-auto mb-12">
             Maintained by leaders in confidential computing and privacy-preserving infrastructure.
           </p>
