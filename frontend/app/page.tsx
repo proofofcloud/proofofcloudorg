@@ -143,6 +143,14 @@ export default function Home() {
               <p className="text-gray-600 mb-4">Fast, permissionless fiat ↔ crypto on/offramp protocol powered by ZK</p>
             </div>
 
+            <div className="bg-white p-8 rounded-xl border-2 border-gray-200 text-center hover:shadow-xl hover:-translate-y-1 transition-all">
+              <div className="w-24 h-24 mx-auto mb-6 flex items-center justify-center bg-white rounded-2xl border border-gray-200 p-3">
+                <Image src="/assets/oasis.png" alt="Oasis" width={96} height={96} className="object-contain" />
+              </div>
+              <h3 className="text-2xl font-semibold mb-3">Oasis</h3>
+              <p className="text-gray-600 mb-4">Add Privacy to Any Blockchain with Oasis ROFL and Oasis Sapphire</p>
+            </div>
+
             <div className="bg-gray-50 p-8 rounded-xl border-2 border-dashed border-gray-300 text-center">
               <div className="w-24 h-24 mx-auto mb-6 flex items-center justify-center bg-white rounded-2xl border border-gray-300">
                 <span className="text-4xl text-gray-400">+</span>
