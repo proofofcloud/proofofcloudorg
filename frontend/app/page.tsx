@@ -180,9 +180,7 @@ export default function Home() {
                 </div>
                 <h4 className="font-semibold text-lg mb-2">Level 1: Human-Assisted</h4>
                 <p className="text-sm text-gray-700 leading-relaxed">
-                  A trusted witness visits the datacenter, boots hardware, runs attestation,
-                  records video proof. Multiple alliance members cross-verify. To fake this,
-                  you&apos;d need colluding witnesses across independent organizations.
+          Alliance members witness and validate extraction of the hardware ID from a remote attestation executed through a cloud control plane (e.g., OVH serial console), verified in real time via a supervised video session or live inspection of a colocated server.
                 </p>
               </div>
 
