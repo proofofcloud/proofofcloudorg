@@ -34,6 +34,7 @@ Examples:
 
 - Extract hardware id from a remote attestation performed via cloud control plane (e.g. OVH’s serial console), verified by a human in a real-time video session
 - Verifying a colocated data-center server via live, human-attended video inspection
+- In case the hardware is in Colocation, members perform a verification of signed [Colocation Provider Pledge](https://proofofcloud.org/ProofOfCloud_Colocation_Pledge.pdf).
 
 ### **Level 2: Automated Verification**
 
