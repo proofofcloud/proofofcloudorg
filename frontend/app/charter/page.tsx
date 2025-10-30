@@ -54,6 +54,7 @@ export default function Charter() {
                 <ul className="space-y-2 text-gray-700 leading-relaxed list-disc pl-6 mt-2">
                   <li>Extract hardware id from a remote attestation performed via cloud control plane (e.g. OVH's serial console), verified by a human in a real-time video session</li>
                   <li>Verifying a colocated data-center server via live, human-attended video inspection</li>
+                  <li>In case the hardware is in Colocation, members perform a verification of signed <a href="/ProofOfCloud_Colocation_Pledge.pdf" target="_blank" className="text-blue-600 hover:text-blue-800 underline">Colocation Provider Pledge</a>. </li>
                 </ul>
               </div>
 
