@@ -1,0 +1,9 @@
+# Proof of Cloud - Robots.txt
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://proofofcloud.org/sitemap.xml
+
+# Disallow crawling of API endpoints
+Disallow: /api/
