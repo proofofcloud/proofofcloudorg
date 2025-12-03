@@ -107,23 +107,23 @@ function isBase64ish(s) {
 // Middleware
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
-app.use(express.static(path.join(__dirname, '..')));
+app.use(express.static(path.join(__dirname, '..', 'frontend', 'out')));
 
 // Serve static files (HTML, CSS, JS, assets)
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'index.html'));
+    res.sendFile(path.join(__dirname, '..', 'frontend', 'out', 'index.html'));
 });
 
 app.get('/charter.html', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'charter.html'));
+    res.sendFile(path.join(__dirname, '..', 'frontend', 'out', 'charter.html'));
 });
 
 app.get('/privacy.html', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'privacy.html'));
+    res.sendFile(path.join(__dirname, '..', 'frontend', 'out', 'privacy.html'));
 });
 
 app.get('/tos.html', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'tos.html'));
+    res.sendFile(path.join(__dirname, '..', 'frontend', 'out', 'tos.html'));
 });
 
 // Attestation verification endpoint
