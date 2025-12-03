@@ -100,7 +100,7 @@ export default function Home() {
                 <Image src="/assets/scrt.png" alt="Secret Network" width={96} height={96} className="object-contain" />
               </div>
               <h3 className="text-2xl font-semibold mb-3">Secret Network</h3>
-              <p className="text-gray-600 mb-4">Privacy-first blockchain platform enabling programmable privacy through secure enclaves and confidential smart contracts.</p>
+              <p className="text-gray-600 mb-4">Privacy-first blockchain platform enabling programmable privacy through secure enclaves and confidential smart contracts</p>
             </div>
 
             <div className="bg-white p-8 rounded-xl border-2 border-gray-200 text-center hover:shadow-xl hover:-translate-y-1 transition-all">
@@ -108,7 +108,7 @@ export default function Home() {
                 <Image src="/assets/phala.png" alt="Phala" width={96} height={96} className="object-contain" />
               </div>
               <h3 className="text-2xl font-semibold mb-3">Phala</h3>
-              <p className="text-gray-600 mb-4">Hardware-secured compute platform that delivers Confidential AI with enterprise-grade privacy.</p>
+              <p className="text-gray-600 mb-4">Hardware-secured compute platform that delivers Confidential AI with enterprise-grade privacy</p>
             </div>
 
             <div className="bg-white p-8 rounded-xl border-2 border-gray-200 text-center hover:shadow-xl hover:-translate-y-1 transition-all">
@@ -116,7 +116,7 @@ export default function Home() {
                 <Image src="/assets/ata.png" alt="Automata" width={96} height={96} className="object-contain" />
               </div>
               <h3 className="text-2xl font-semibold mb-3">Automata</h3>
-              <p className="text-gray-600 mb-4">Automata is the machine attestation layer built by humans, designed for machines.</p>
+              <p className="text-gray-600 mb-4">Automata is the machine attestation layer built by humans, designed for machines</p>
             </div>
 
             <div className="bg-white p-8 rounded-xl border-2 border-gray-200 text-center hover:shadow-xl hover:-translate-y-1 transition-all">
@@ -124,7 +124,7 @@ export default function Home() {
                 <Image src="/assets/primus.png" alt="Primus" width={96} height={96} className="object-contain" />
               </div>
               <h3 className="text-2xl font-semibold mb-3">Primus</h3>
-              <p className="text-gray-600 mb-4">Enable secure, permissionless data verification and computation in blockchain and AI using zkTLS and zkFHE.</p>
+              <p className="text-gray-600 mb-4">Enable secure, permissionless data verification and computation in blockchain and AI using zkTLS and zkFHE</p>
             </div>
 
             <div className="bg-white p-8 rounded-xl border-2 border-gray-200 text-center hover:shadow-xl hover:-translate-y-1 transition-all">
@@ -132,7 +132,7 @@ export default function Home() {
                 <Image src="/assets/nillion.jpg" alt="Nillion" width={96} height={96} className="object-contain" />
               </div>
               <h3 className="text-2xl font-semibold mb-3">Nillion</h3>
-              <p className="text-gray-600 mb-4">Nillion is a secure computation network that decentralizes trust for high value data in the same way that blockchains decentralized transactions.</p>
+              <p className="text-gray-600 mb-4">Nillion is a secure computation network that decentralizes trust for high value data in the same way that blockchains decentralized transactions</p>
             </div>
 
             <div className="bg-white p-8 rounded-xl border-2 border-gray-200 text-center hover:shadow-xl hover:-translate-y-1 transition-all">
@@ -156,7 +156,7 @@ export default function Home() {
                 <Image src="/assets/flashbots.png" alt="Flashbots" width={96} height={96} className="object-contain" />
               </div>
               <h3 className="text-2xl font-semibold mb-3">Flashbots</h3>
-              <p className="text-gray-600 mb-4">A research and development organization formed to mitigate the negative externalities posed by MEV to stateful blockchains, starting with Ethereum.</p>
+              <p className="text-gray-600 mb-4">A research and development organization formed to mitigate the negative externalities posed by MEV to stateful blockchains, starting with Ethereum</p>
             </div>
 
             <div className="bg-white p-8 rounded-xl border-2 border-gray-200 text-center hover:shadow-xl hover:-translate-y-1 transition-all">
@@ -164,7 +164,7 @@ export default function Home() {
                 <Image src="/assets/zkverify.png" alt="zkVerify" width={96} height={96} className="object-contain" />
               </div>
               <h3 className="text-2xl font-semibold mb-3">zkVerify</h3>
-              <p className="text-gray-600 mb-4">Universal proof verification layer that enables ultra-fast, scalable, and cost-efficient verification of zero-knowledge proofs across multiple ecosystems.</p>
+              <p className="text-gray-600 mb-4">Universal proof verification layer that enables ultra-fast, scalable, and cost-efficient verification of zero-knowledge proofs across multiple ecosystems</p>
             </div>
 
             <div className="bg-white p-8 rounded-xl border-2 border-gray-200 text-center hover:shadow-xl hover:-translate-y-1 transition-all">
@@ -175,12 +175,20 @@ export default function Home() {
               <p className="text-gray-600 mb-4">iExec is the builders' home for privacy tools. Easily add privacy features to your builds and applications</p>
             </div>
 
+            <div className="bg-white p-8 rounded-xl border-2 border-gray-200 text-center hover:shadow-xl hover:-translate-y-1 transition-all">
+              <div className="w-24 h-24 mx-auto mb-6 flex items-center justify-center bg-white rounded-2xl border border-gray-200 p-3">
+                <Image src="/assets/alephcloud.png" alt="Aleph Cloud" width={96} height={96} className="object-contain" />
+              </div>
+              <h3 className="text-2xl font-semibold mb-3">Aleph Cloud</h3>
+              <p className="text-gray-600 mb-4">Decentralized cloud computing platform providing secure, distributed infrastructure for modern applications and confidential workloads</p>
+            </div>
+
             <div className="bg-gray-50 p-8 rounded-xl border-2 border-dashed border-gray-300 text-center">
               <div className="w-24 h-24 mx-auto mb-6 flex items-center justify-center bg-white rounded-2xl border border-gray-300">
                 <span className="text-4xl text-gray-400">+</span>
               </div>
               <h3 className="text-2xl font-semibold mb-3">Your Organization</h3>
-              <p className="text-gray-600 mb-4">Join the alliance and help build a transparent, verifiable registry for confidential computing infrastructure.</p>
+              <p className="text-gray-600 mb-4">Join the alliance and help build a transparent, verifiable registry for confidential computing infrastructure</p>
               <a href="mailto:contact@proofofcloud.org" className="text-blue-600 font-semibold hover:underline">Apply to Join →</a>
             </div>
           </div>
