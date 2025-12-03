@@ -172,7 +172,7 @@ export default function Home() {
                 <Image src="/assets/iexec.png" alt="iExec" width={96} height={96} className="object-contain" />
               </div>
               <h3 className="text-2xl font-semibold mb-3">iExec</h3>
-              <p className="text-gray-600 mb-4">Decentralized marketplace for cloud computing resources, enabling secure and scalable distributed computing with confidentiality guarantees.</p>
+              <p className="text-gray-600 mb-4">iExec is the builders' home for privacy tools. Easily add privacy features to your builds and applications</p>
             </div>
 
             <div className="bg-gray-50 p-8 rounded-xl border-2 border-dashed border-gray-300 text-center">
