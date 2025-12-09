@@ -81,6 +81,7 @@ export default function VerificationMethods() {
                       <p className="font-semibold mb-1">3. Datacenter Pledge of Notification</p>
                       <p className="text-gray-600 text-sm leading-relaxed">
                         Datacenter pledges to alert Proof of Cloud when server is removed or suspicious devices are introduced.
+                        Pledge form available <a href="/ProofOfCloud_Colocation_Pledge.pdf" target="_blank" className="text-blue-600 hover:text-blue-800 underline">here</a>.
                       </p>
                     </div>
 
