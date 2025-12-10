@@ -3,6 +3,7 @@ const cors = require('cors');
 const path = require('path');
 const { execFile } = require('child_process');
 const fs = require('fs');
+const https = require('https');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,32 +18,32 @@ const DEFAULT_TOOL_PATH = path.join(
     'dcap_collateral_tool'
   );
   const TOOL_PATH = process.env.DCAP_TOOL_PATH || DEFAULT_TOOL_PATH;
-  
+
   // --- Helpers ---------------------------------------------------------------
-  
+
     // Returns true if `s` is a hex string with even length.
     function isHex(s) {
         return typeof s === 'string' && /^[0-9a-fA-F]+$/.test(s) && (s.length % 2 === 0);
     }
-  
+
 // Base64 detection is intentionally permissive (allows '=' and line breaks).
 function isBase64ish(s) {
     return typeof s === 'string'
       && /^[A-Za-z0-9+/=\r\n]+$/.test(s)
       && (s.replace(/\s+/g, '').length % 4 === 0);
   }
-  
+
   // Normalize user input into hex for the DCAP tool.
   // Returns hex string (lowercase) OR null (on unsupported/empty).
   function normalizeToHex(input) {
     const raw = (input ?? '').toString().trim();
     if (!raw) return null;
-  
+
     // Compact whitespace and drop leading 0x
     const compact = raw.replace(/\s+/g, '');
     const maybeHex = compact.replace(/^0x/i, '');
     if (isHex(maybeHex)) return maybeHex.toLowerCase();
-  
+
     // Try base64 → hex
     if (isBase64ish(raw)) {
       try {
@@ -53,7 +54,7 @@ function isBase64ish(s) {
     }
     return null;
   }
-  
+
   // Execute the DCAP tool with a hex-encoded quote; returns parsed JSON-like object.
   // Never rejects for user/quote errors; only rejects if the tool binary is missing.
   function runDcapTool(hexQuote) {
@@ -62,7 +63,7 @@ function isBase64ish(s) {
       if (!fs.existsSync(TOOL_PATH)) {
         return reject(new Error(`DCAP tool not found at ${TOOL_PATH}. Build it or set DCAP_TOOL_PATH.`));
       }
-  
+
       // If input is not valid hex, return a synthetic "invalid" result.
       if (!hexQuote || typeof hexQuote !== 'string' || !isHex(hexQuote)) {
         return resolve({
@@ -70,7 +71,7 @@ function isBase64ish(s) {
           collateral: { error: 'invalid_input' }
         });
       }
-  
+
       // Call the tool; if it errors, return "invalid" (do not reject).
       execFile(
         TOOL_PATH,
@@ -84,10 +85,10 @@ function isBase64ish(s) {
               collateral: { error: 'exec_error', message: (stderr && stderr.toString()) || err.message || 'DCAP tool error' }
             });
           }
-  
+
           try {
             const parsed = JSON.parse(stdout.toString());
-  
+
             // Coerce status/result to the string form your handler expects ('0' | '1')
             const out = { ...parsed, status: parsed.status || {} };
             out.status.result = String(Number(out.status.result ?? 1)); // '0' on success, otherwise '1'
@@ -193,11 +194,75 @@ function generateMockPPID() {
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
-    res.json({ 
-        status: 'healthy', 
+    res.json({
+        status: 'healthy',
         timestamp: new Date().toISOString(),
         service: 'Proof of Cloud Verification API'
     });
+});
+
+// AMD attestation verification proxy (Nillion verifier)
+// Note: When running the Next.js frontend dev server, the /api/verify-amd
+// route is handled by frontend/app/api/verify-amd/route.ts instead.
+app.post('/api/verify-amd', (req, res) => {
+    try {
+        const { report } = req.body || {};
+
+        if (!report || typeof report !== 'string' || report.trim().length === 0) {
+            return res.status(400).json({
+                error: 'Invalid AMD attestation report provided',
+            });
+        }
+
+        const payload = JSON.stringify({ report: report.trim() });
+
+        const options = {
+            hostname: 'nilcc-verifier.nillion.network',
+            port: 443,
+            path: '/v1/attestations/verify-amd',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Content-Length': Buffer.byteLength(payload),
+            },
+        };
+
+        const proxyReq = https.request(options, (proxyRes) => {
+            let data = '';
+
+            proxyRes.on('data', (chunk) => {
+                data += chunk;
+            });
+
+            proxyRes.on('end', () => {
+                const statusCode = proxyRes.statusCode || 500;
+                res.status(statusCode);
+
+                // Try to forward JSON as-is; fall back to plain text if parsing fails
+                try {
+                    const json = data ? JSON.parse(data) : {};
+                    res.json(json);
+                } catch {
+                    res.type('text/plain').send(data || '');
+                }
+            });
+        });
+
+        proxyReq.on('error', (err) => {
+            console.error('AMD verifier proxy error:', err);
+            res.status(502).json({
+                error: 'Failed to reach AMD verifier',
+            });
+        });
+
+        proxyReq.write(payload);
+        proxyReq.end();
+    } catch (err) {
+        console.error('AMD verifier proxy handler error:', err);
+        res.status(500).json({
+            error: 'Internal server error in AMD verifier proxy',
+        });
+    }
 });
 
 app.listen(PORT, () => {

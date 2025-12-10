@@ -18,6 +18,7 @@ export function VerificationFormWithLabel() {
     uploadedAt?: string;
     error?: string;
   } | null>(null);
+  const [attestationType, setAttestationType] = useState<'intel' | 'amd'>('intel');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,57 +36,85 @@ export function VerificationFormWithLabel() {
     setResult(null);
 
     try {
-      // Normalize to hex (remove 0x prefix if present, remove whitespace)
-      let quoteHex = attestation.trim().replace(/^0x/i, '').replace(/\s+/g, '');
+      if (attestationType === 'intel') {
+        // Intel flow: normalize to hex and use Phala Proof of Cloud API
+        let quoteHex = attestation.trim().replace(/^0x/i, '').replace(/\s+/g, '');
 
-      // Check if it's potentially base64 and convert
-      if (!/^[0-9a-fA-F]+$/.test(quoteHex)) {
-        try {
-          // Attempt base64 to hex conversion
-          const binary = atob(quoteHex);
-          quoteHex = Array.from(binary, (char) =>
-            char.charCodeAt(0).toString(16).padStart(2, '0')
-          ).join('');
-        } catch {
-          throw new Error("Invalid attestation format. Please provide hex or base64 encoded quote.");
+        if (!/^[0-9a-fA-F]+$/.test(quoteHex)) {
+          try {
+            const binary = atob(quoteHex);
+            quoteHex = Array.from(binary, (char) =>
+              char.charCodeAt(0).toString(16).padStart(2, '0')
+            ).join('');
+          } catch {
+            throw new Error("Invalid attestation format. Please provide hex or base64 encoded quote.");
+          }
         }
+
+        const verifyResponse = await fetch("https://cloud-api.phala.com/proofofcloud/attestations/verify", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ hex: quoteHex, type: attestationType }),
+        });
+
+        const verifyData = await verifyResponse.json();
+
+        if (!verifyResponse.ok) {
+          throw new Error(verifyData.error || verifyData.message || "Verification failed");
+        }
+
+        const checksum = verifyData.checksum;
+        if (!checksum) {
+          throw new Error("No checksum returned from verification service");
+        }
+
+        const viewResponse = await fetch(`https://cloud-api.phala.com/proofofcloud/attestations/view/${checksum}`);
+
+        if (!viewResponse.ok) {
+          throw new Error("Failed to retrieve verification details");
+        }
+
+        const viewData = await viewResponse.json();
+
+        setResult({
+          verified: viewData.verified || false,
+          proofOfCloud: viewData.proof_of_cloud || false,
+          checksum: checksum,
+          uploadedAt: viewData.uploaded_at,
+        });
+      } else {
+        // AMD flow: send raw report to Nillion verifier
+        const report = attestation.trim();
+
+        const verifierResponse = await fetch('/api/verify-amd', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ report }),
+        });
+
+        const verifierData = await verifierResponse.json().catch(() => ({}));
+
+        const ok = verifierResponse.ok && (verifierData as any)?.success === true;
+
+        if (!ok) {
+          throw new Error(
+            (verifierData as any)?.error ||
+            (verifierData as any)?.message ||
+            "AMD attestation verification failed"
+          );
+        }
+
+        setResult({
+          verified: true,
+          proofOfCloud: false,
+          checksum: undefined,
+          uploadedAt: undefined,
+        });
       }
-
-      // Step 1: Submit attestation to get checksum
-      const verifyResponse = await fetch("https://cloud-api.phala.com/proofofcloud/attestations/verify", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ hex: quoteHex }),
-      });
-
-      const verifyData = await verifyResponse.json();
-
-      if (!verifyResponse.ok) {
-        throw new Error(verifyData.error || verifyData.message || "Verification failed");
-      }
-
-      const checksum = verifyData.checksum;
-      if (!checksum) {
-        throw new Error("No checksum returned from verification service");
-      }
-
-      // Step 2: Fetch full verification result using checksum
-      const viewResponse = await fetch(`https://cloud-api.phala.com/proofofcloud/attestations/view/${checksum}`);
-
-      if (!viewResponse.ok) {
-        throw new Error("Failed to retrieve verification details");
-      }
-
-      const viewData = await viewResponse.json();
-
-      setResult({
-        verified: viewData.verified || false,
-        proofOfCloud: viewData.proof_of_cloud || false,
-        checksum: checksum,
-        uploadedAt: viewData.uploaded_at,
-      });
     } catch (error) {
       console.error("Verification error:", error);
       setResult({
@@ -281,6 +310,31 @@ export function VerificationFormWithLabel() {
 
       {/* Form */}
       <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="flex items-center gap-4">
+          <span className="text-sm font-medium text-gray-900">Platform</span>
+          <label className="inline-flex items-center gap-2 text-sm text-gray-700">
+            <input
+              type="radio"
+              name="attestationType"
+              value="intel"
+              checked={attestationType === 'intel'}
+              onChange={() => setAttestationType('intel')}
+              className="h-4 w-4"
+            />
+            Intel
+          </label>
+          <label className="inline-flex items-center gap-2 text-sm text-gray-700">
+            <input
+              type="radio"
+              name="attestationType"
+              value="amd"
+              checked={attestationType === 'amd'}
+              onChange={() => setAttestationType('amd')}
+              className="h-4 w-4"
+            />
+            AMD
+          </label>
+        </div>
         <Textarea
           id="attestation"
           value={attestation}
