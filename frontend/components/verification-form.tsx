@@ -18,6 +18,7 @@ export function VerificationFormWithLabel() {
     uploadedAt?: string;
     error?: string;
   } | null>(null);
+  const [attestationType, setAttestationType] = useState<'intel' | 'amd'>('intel');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,7 +58,7 @@ export function VerificationFormWithLabel() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ hex: quoteHex }),
+        body: JSON.stringify({ hex: quoteHex, type: attestationType }),
       });
 
       const verifyData = await verifyResponse.json();
@@ -281,6 +282,31 @@ export function VerificationFormWithLabel() {
 
       {/* Form */}
       <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="flex items-center gap-4">
+          <span className="text-sm font-medium text-gray-900">Platform</span>
+          <label className="inline-flex items-center gap-2 text-sm text-gray-700">
+            <input
+              type="radio"
+              name="attestationType"
+              value="intel"
+              checked={attestationType === 'intel'}
+              onChange={() => setAttestationType('intel')}
+              className="h-4 w-4"
+            />
+            Intel
+          </label>
+          <label className="inline-flex items-center gap-2 text-sm text-gray-700">
+            <input
+              type="radio"
+              name="attestationType"
+              value="amd"
+              checked={attestationType === 'amd'}
+              onChange={() => setAttestationType('amd')}
+              className="h-4 w-4"
+            />
+            AMD
+          </label>
+        </div>
         <Textarea
           id="attestation"
           value={attestation}
