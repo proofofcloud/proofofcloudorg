@@ -51,7 +51,8 @@ export function VerificationFormWithLabel() {
           }
         }
 
-        const verifyResponse = await fetch("https://cloud-api.phala.com/proofofcloud/attestations/verify", {
+        // Use local API proxy to avoid CORS issues
+        const verifyResponse = await fetch("/api/verify-attestation", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -70,7 +71,7 @@ export function VerificationFormWithLabel() {
           throw new Error("No checksum returned from verification service");
         }
 
-        const viewResponse = await fetch(`https://cloud-api.phala.com/proofofcloud/attestations/view/${checksum}`);
+        const viewResponse = await fetch(`/api/view-attestation/${checksum}`);
 
         if (!viewResponse.ok) {
           throw new Error("Failed to retrieve verification details");
