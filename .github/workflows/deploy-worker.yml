@@ -37,4 +37,4 @@ jobs:
         run: npm ci
 
       - name: Deploy OpenNext Worker
-        run: npm run deploy:cf
+        run: npm run deploy
