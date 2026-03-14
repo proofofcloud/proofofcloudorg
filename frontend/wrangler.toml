@@ -1,2 +1,5 @@
 name = "proof-of-cloud-website"
 compatibility_date = "2025-10-27"
+main = ".open-next/worker.js"
+assets = { directory = ".open-next/assets", binding = "ASSETS" }
+compatibility_flags = ["nodejs_compat"]
